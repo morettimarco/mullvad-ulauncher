@@ -11,9 +11,7 @@ from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 
 import subprocess, logging, os, time
 
-
 logger = logging.getLogger(__name__)
-
 
 class DemoExtension(Extension):
 
@@ -33,24 +31,24 @@ class KeywordQueryEventListener(EventListener):
 #       item_name = extension.preferences['item_name']
 
 #       Create Connect entry for the menu
-        data = {'action_name': 'Connect','action_icon':'images/Connect.png','action_command':'connect'}
+        data = {'action_name': 'Connect','action_icon':'images/Connect.png','action_command':'connect','action_description':'Connect VPN'}
         items.append(ExtensionResultItem(icon=data['action_icon'],
                                             name=data['action_name'],
-                                            description='Item description',
+                                            description=data['action_description'],
                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
 
 #       Create disconnect entry for the menu        
-        data = {'action_name': 'Disconnect','action_icon':'images/Disconnect.png','action_command':'disconnect'}
+        data = {'action_name': 'Disconnect','action_icon':'images/Disconnect.png','action_command':'disconnect','action_description':'Disconnect VPN'}
         items.append(ExtensionResultItem(icon=data['action_icon'],
                                             name=data['action_name'],
-                                            description='Item description',
+                                            description=data['action_description'],
                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
 
 #       Create reconnect entry for the menu        
-        data = {'action_name': 'Reconnect','action_icon':'images/Reconnect.png','action_command':'reconnect'}
+        data = {'action_name': 'Reconnect','action_icon':'images/Reconnect.png','action_command':'reconnect','action_description':'Reconnect VPN'}
         items.append(ExtensionResultItem(icon=data['action_icon'],
                                             name=data['action_name'],
-                                            description='Item description',
+                                            description=data['action_description'],
                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
 
         return RenderResultListAction(items)
@@ -62,17 +60,12 @@ class ItemEnterEventListener(EventListener):
         iconprop = "--icon="+root+"/images/480px-Mullvad_logo.svg.png"
         data = event.get_data()
 
-
-        #subprocess.run(['notify-send', iconprop, 'Mullvad '+data['action_name']]+'...', stdout=subprocess.PIPE)
-
         #Execute mullvad CLI command
         subprocess.run(['mullvad', data['action_command']], stdout=subprocess.PIPE)
-        
-        
-        return RenderResultListAction([ExtensionResultItem(icon=data['action_icon'],
-                                                           name=data['action_name'],
-                                                           on_enter=HideWindowAction())])
-
+             
+#        return RenderResultListAction([ExtensionResultItem(icon=data['action_icon'],
+#                                                           name=data['action_name'],
+#                                                           on_enter=HideWindowAction())])
 
 if __name__ == '__main__':
     DemoExtension().run()
