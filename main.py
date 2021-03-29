@@ -25,14 +25,20 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items = []
         logger.info('preferences %s' % json.dumps(extension.preferences))
+
 #       for i in range(5):
-        item_name = extension.preferences['item_name']
-        data = {'new_name': '%s was clicked' % (item_name)}
-        items.append(ExtensionResultItem(icon='images/480px-Mullvad_logo.svg.png',
+#       item_name = extension.preferences['item_name']
+
+#       Create Connect entry for the menu
+        data = {'action_name': 'Connnect was clicked','action_icon':'images/Connect.png'}
+        items.append(ExtensionResultItem(icon='images/Connect.png',
                                             name='%s' % ('Connect'),
                                             description='Item description',
                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
-        items.append(ExtensionResultItem(icon='images/480px-Mullvad_logo.svg.png',
+
+#       Create disconnect entry for the menu        
+        data = {'action_name': 'Disconnect was clicked','action_icon':'images/Disconnect.png'}
+        items.append(ExtensionResultItem(icon='images/Disconnect.png',
                                             name='%s' % ('Disconnect'),
                                             description='Item description',
                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
@@ -44,8 +50,8 @@ class ItemEnterEventListener(EventListener):
 
     def on_event(self, event, extension):
         data = event.get_data()
-        return RenderResultListAction([ExtensionResultItem(icon='images/icon.png',
-                                                           name=data['new_name'],
+        return RenderResultListAction([ExtensionResultItem(icon=data['action_icon'],
+                                                           name=data['action_name'],
                                                            on_enter=HideWindowAction())])
 
 
