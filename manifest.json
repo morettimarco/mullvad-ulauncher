@@ -9,10 +9,10 @@
   },
   "preferences": [
     {
-      "id": "demo_kw",
+      "id": "main_keyword",
       "type": "keyword",
-      "name": "Demo",
-      "default_value": "dm"
+      "name": "Mullvad",
+      "default_value": "mvpn"
     },
     {
       "id": "item_name",
