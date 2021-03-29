@@ -35,21 +35,21 @@ class KeywordQueryEventListener(EventListener):
         items.append(ExtensionResultItem(icon=data['action_icon'],
                                             name=data['action_name'],
                                             description=data['action_description'],
-                                            on_enter=ExtensionCustomAction(data, keep_app_open=True)))
+                                            on_enter=ExtensionCustomAction(data, keep_app_open=False)))
 
 #       Create disconnect entry for the menu        
         data = {'action_name': 'Disconnect','action_icon':'images/Disconnect.png','action_command':'disconnect','action_description':'Disconnect VPN'}
         items.append(ExtensionResultItem(icon=data['action_icon'],
                                             name=data['action_name'],
                                             description=data['action_description'],
-                                            on_enter=ExtensionCustomAction(data, keep_app_open=True)))
+                                            on_enter=ExtensionCustomAction(data, keep_app_open=False)))
 
 #       Create reconnect entry for the menu        
         data = {'action_name': 'Reconnect','action_icon':'images/Reconnect.png','action_command':'reconnect','action_description':'Reconnect VPN'}
         items.append(ExtensionResultItem(icon=data['action_icon'],
                                             name=data['action_name'],
                                             description=data['action_description'],
-                                            on_enter=ExtensionCustomAction(data, keep_app_open=True)))
+                                            on_enter=ExtensionCustomAction(data, keep_app_open=False)))
 
         return RenderResultListAction(items)
 
