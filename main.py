@@ -63,7 +63,7 @@ class ItemEnterEventListener(EventListener):
         data = event.get_data()
 
 
-        subprocess.run(['notify-send', iconprop, 'Mullvad '+data['action_name']]+'...', stdout=subprocess.PIPE)
+        #subprocess.run(['notify-send', iconprop, 'Mullvad '+data['action_name']]+'...', stdout=subprocess.PIPE)
 
         #Execute mullvad CLI command
         subprocess.run(['mullvad', data['action_command']], stdout=subprocess.PIPE)
