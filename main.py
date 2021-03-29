@@ -57,7 +57,6 @@ class KeywordQueryEventListener(EventListener):
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
         root = os.path.dirname(os.path.realpath(__file__))
-        iconprop = "--icon="+root+"/images/480px-Mullvad_logo.svg.png"
         data = event.get_data()
 
         #Execute mullvad CLI command
