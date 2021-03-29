@@ -9,6 +9,9 @@ from ulauncher.api.shared.action.RenderResultListAction import RenderResultListA
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
 from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 
+import subprocess, logging, os, time
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -30,16 +33,16 @@ class KeywordQueryEventListener(EventListener):
 #       item_name = extension.preferences['item_name']
 
 #       Create Connect entry for the menu
-        data = {'action_name': 'Connnect was clicked','action_icon':'images/Connect.png'}
+        data = {'action_name': 'Connnect','action_icon':'images/Connect.png','action_command':'connect'}
         items.append(ExtensionResultItem(icon='images/Connect.png',
-                                            name='%s' % ('Connect'),
+                                            name=data['action_name'],
                                             description='Item description',
                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
 
 #       Create disconnect entry for the menu        
-        data = {'action_name': 'Disconnect was clicked','action_icon':'images/Disconnect.png'}
+        data = {'action_name': 'Disconnect','action_icon':'images/Disconnect.png','action_command':'disconnect'}
         items.append(ExtensionResultItem(icon='images/Disconnect.png',
-                                            name='%s' % ('Disconnect'),
+                                            name=data['action_name'],
                                             description='Item description',
                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
 
@@ -47,9 +50,18 @@ class KeywordQueryEventListener(EventListener):
 
 
 class ItemEnterEventListener(EventListener):
-
     def on_event(self, event, extension):
+        root = os.path.dirname(os.path.realpath(__file__))
+        iconprop = "--icon="+root+"/images/480px-Mullvad_logo.svg.png"
         data = event.get_data()
+
+
+        subprocess.run(['notify-send', iconprop, 'Trying to '+data['action_name']]+'...', stdout=subprocess.PIPE)
+
+        #Execute mullvad CLI command
+        subprocess.run(['mullvad', data['action_name']], stdout=subprocess.PIPE)
+        
+        
         return RenderResultListAction([ExtensionResultItem(icon=data['action_icon'],
                                                            name=data['action_name'],
                                                            on_enter=HideWindowAction())])
