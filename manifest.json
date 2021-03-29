@@ -3,7 +3,7 @@
   "name": "Mullvad Ulauncher",
   "description": "An extension to Ulauncher to control the Mullvad VPN",
   "developer_name": "Marco Moretti",
-  "icon": "images/icon.png",
+  "icon": "images/480px-Mullvad_logo.svg.png",
   "options": {
     "query_debounce": 0.05
   },
