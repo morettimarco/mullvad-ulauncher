@@ -34,14 +34,21 @@ class KeywordQueryEventListener(EventListener):
 
 #       Create Connect entry for the menu
         data = {'action_name': 'Connect','action_icon':'images/Connect.png','action_command':'connect'}
-        items.append(ExtensionResultItem(icon='images/Connect.png',
+        items.append(ExtensionResultItem(icon=data['action_icon'],
                                             name=data['action_name'],
                                             description='Item description',
                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
 
 #       Create disconnect entry for the menu        
         data = {'action_name': 'Disconnect','action_icon':'images/Disconnect.png','action_command':'disconnect'}
-        items.append(ExtensionResultItem(icon='images/Disconnect.png',
+        items.append(ExtensionResultItem(icon=data['action_icon'],
+                                            name=data['action_name'],
+                                            description='Item description',
+                                            on_enter=ExtensionCustomAction(data, keep_app_open=True)))
+
+#       Create reconnect entry for the menu        
+        data = {'action_name': 'Reconnect','action_icon':'images/Reconnect.png','action_command':'reconnect'}
+        items.append(ExtensionResultItem(icon=data['action_icon'],
                                             name=data['action_name'],
                                             description='Item description',
                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
@@ -56,7 +63,7 @@ class ItemEnterEventListener(EventListener):
         data = event.get_data()
 
 
-        #subprocess.run(['notify-send', iconprop, 'Trying to '+data['action_name']]+'...', stdout=subprocess.PIPE)
+        subprocess.run(['notify-send', iconprop, 'Mullvad '+data['action_name']]+'...', stdout=subprocess.PIPE)
 
         #Execute mullvad CLI command
         subprocess.run(['mullvad', data['action_command']], stdout=subprocess.PIPE)
