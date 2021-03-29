@@ -33,7 +33,7 @@ class KeywordQueryEventListener(EventListener):
 #       item_name = extension.preferences['item_name']
 
 #       Create Connect entry for the menu
-        data = {'action_name': 'Connnect','action_icon':'images/Connect.png','action_command':'connect'}
+        data = {'action_name': 'Connect','action_icon':'images/Connect.png','action_command':'connect'}
         items.append(ExtensionResultItem(icon='images/Connect.png',
                                             name=data['action_name'],
                                             description='Item description',
@@ -56,7 +56,7 @@ class ItemEnterEventListener(EventListener):
         data = event.get_data()
 
 
-        subprocess.run(['notify-send', iconprop, 'Trying to '+data['action_name']]+'...', stdout=subprocess.PIPE)
+        #subprocess.run(['notify-send', iconprop, 'Trying to '+data['action_name']]+'...', stdout=subprocess.PIPE)
 
         #Execute mullvad CLI command
         subprocess.run(['mullvad', data['action_name']], stdout=subprocess.PIPE)
